@@ -28,8 +28,9 @@ function setup() {
             options: [BLANK, UP, RIGHT, DOWN, LEFT]
         }
     }
+    // hardcoding stuff, dont pay attention
     grid[2].options = [BLANK, UP]
-
+    grid[3].options = [BLANK, UP]
 }
 
 const w = width / size
@@ -37,7 +38,7 @@ const h = height / size
 
 function draw() {
     // making a grid copy to FCKN DESTROY it /aka sort/ because we cant touch our original grid
-    // sort it by options quantity, to choose a cell with lower entropy
+    // sort it by option quantity, to choose a cell with lower entropy
     // (lower entropy -> less options to choose) [blank, up, left right, etc]
     // (higher entorpy -> more options to choose) [up, down] /xoski/ (isk duq xaski lsum eq)
     let gridCopy = grid.slice();
@@ -51,8 +52,11 @@ function draw() {
         return cell.options.length == lowestEntropyDetected
     })
 
-    console.log(grid)
-    console.log(cellsWithLowest)
+    // now lets collapse something randomly
+    const cell = random(cellsWithLowest)
+    cell.collapsed = true
+    const pick = random(cell.options)
+    cell.options = [pick]
 
     createCanvas(width, height)
     for (let j = 0; j < size; j++) {
