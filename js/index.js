@@ -70,9 +70,18 @@ function draw() {
                 stroke(40, 40, 40)
                 rect(i * w, j * h, w, h);
             }
-
         }
-
     }
+
+    const nextTiles = [];
+    for (let j = 0; j < array.length; j++) {
+        for (let i = 0; i < array.length; i++) {
+            let index = i + j * size
+            if (tiles[index].collapsed) {
+                nextTiles[index] = tiles[index]
+            }
+        }
+    }
+
     noLoop()
 }
