@@ -5,11 +5,11 @@ const rules = {
         [BLANK, DOWN],
         [BLANK, LEFT]
     ],
-    UP: [
-        [RIGHT, DOWN, LEFT],
-        [UP, DOWN, LEFT],
-        [BLANK, DOWN],
-        [UP, DOWN, RIGHT]
+    UP: [ //up tile
+        [RIGHT, DOWN, LEFT], // tiles that can connect to the up side of up tile
+        [UP, DOWN, LEFT], //  tiles that can connect to the right side of up tile
+        [BLANK, DOWN], //  tiles that can connect to the down side of up tile
+        [UP, DOWN, RIGHT] // and left sides
     ],
     RIGHT: [
         [RIGHT, DOWN, LEFT],
