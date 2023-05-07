@@ -82,6 +82,5 @@ function draw() {
             }
         }
     }
-
     noLoop()
 }
