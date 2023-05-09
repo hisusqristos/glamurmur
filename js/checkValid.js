@@ -1,4 +1,3 @@
-const options = [BLANK, UP, RIGHT, DOWN, LEFT] 
 const isEqual = (arr1, arr2) => arr1.every((item, index) => item === arr2[index]);
 
 // function to test 
@@ -12,7 +11,7 @@ const testEqual = (testable, result) => {
 }
 
 // ELEGANTLY filter the items that exit in the second arrays
-function checkValid(arr1, arr2) {
+var checkValid = (arr1, arr2) => {
     return arr1.filter(item => !arr2.includes(item));
 }
 
