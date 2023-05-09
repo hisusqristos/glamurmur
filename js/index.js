@@ -12,6 +12,8 @@ const RIGHT = 2
 const DOWN = 3
 const LEFT = 4
 
+const options = [BLANK, UP, RIGHT, DOWN, LEFT]
+
 const tiles = [];
 function preload() {
     tiles[0] = loadImage("../tiles/blank.png");
@@ -25,7 +27,7 @@ function setup() {
     for (let i = 0; i < size * size; i++) {
         grid[i] = {
             collapsed: false,
-            options: [BLANK, UP, RIGHT, DOWN, LEFT]
+            options: options
         }
     }
     // hardcoding stuff, dont pay attention
@@ -35,6 +37,10 @@ function setup() {
 
 const w = width / size
 const h = height / size
+
+function mousePressed() {
+    redraw()
+}
 
 function draw() {
     // making a grid copy to FCKN DESTROY it /aka sort/ because we cant touch our original grid
@@ -81,10 +87,11 @@ function draw() {
         for (let i = 0; i < grid.length; i++) {
             let index = i + j * size
             if (grid[index].collapsed) {
-                // if collapsed -> keep it as it is
+                console.log(grid[index])
+                // if collapsed -> keep it the same
                 nextTiles[index] = grid[index]
             } else {
-                const options = [BLANK, UP, RIGHT, DOWN, LEFT]
+
                 // looking whats above that cell (by j-1. its gets you one row upper /?/)
                 if (j > 0) {
                     let up = grid[i + (j - 1) * size]
@@ -103,14 +110,14 @@ function draw() {
                     }
                 }
 
-                // down
-                if (j < size - 1) {
-                    let down = grid[i + (j + 1) * size];
-                    for (let option of down.options) {
-                        let valid = rules[option][0]
-                        checkValid(options, valid)
-                    }
-                }
+                // // down
+                // if (j < size - 1) {
+                //     let down = grid[i + (j + 1) * size];
+                //     for (let option of down.options) {
+                //         let valid = rules[option][0]
+                //         checkValid(options, valid)
+                //     }
+                // }
 
                 // left
                 if (i > 0) {
