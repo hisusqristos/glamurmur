@@ -30,14 +30,12 @@ function setup() {
             options: options
         }
     }
-    // hardcoding stuff, dont pay attention
-    grid[2].options = [BLANK, UP]
-    grid[3].options = [BLANK, UP]
 }
 
 const w = width / size
 const h = height / size
 
+// collapse onclick
 function mousePressed() {
     redraw()
 }
@@ -48,12 +46,15 @@ function draw() {
     // (lower entropy -> less options to choose) [blank, up, left right, etc]
     // (higher entorpy -> more options to choose) [up, down] /xoski/ (isk duq xaski lsum eq)
     let gridCopy = grid.slice();
+    // filter collapsed cells 
+    gridCopy = gridCopy.filter((a) => !a.collapsed)
+    console.table(gridCopy)
     gridCopy.sort((a, b) => {
         return a.options.length - b.options.length
     });
     const eachCellOptions = gridCopy.map((cell) => cell.options.length)
     const lowestEntropyDetected = Math.min(...eachCellOptions)
-    // in case if several cells having minimum entropy,we filter them
+    // in case if several cells have minimum entropy, we filter them
     cellsWithLowest = gridCopy.filter((cell) => {
         return cell.options.length == lowestEntropyDetected
     })
@@ -82,50 +83,61 @@ function draw() {
     // now collapsing nex generation of tiles.
     // we look for a collapsed tile and collapse its surroundings (whats up, down, left and right)
     // we have set rules in our rules file and by them we just remove not matching options
-    const nextTiles = [];
-    for (let j = 0; j < grid.length; j++) {
-        for (let i = 0; i < grid.length; i++) {
-            let index = i + j * size
+    let nextTiles = [];
+    for (let j = 0; j < size; j++) {
+        for (let i = 0; i < size; i++) {
+            let index = i + j * size;
             if (grid[index].collapsed) {
-                console.log(grid[index])
                 // if collapsed -> keep it the same
                 nextTiles[index] = grid[index]
             } else {
-
                 // looking whats above that cell (by j-1. its gets you one row upper /?/)
                 if (j > 0) {
+                    let validOptions = []
                     let up = grid[i + (j - 1) * size]
                     for (let option of up.options) {
                         let valid = rules[option][2]
-                        checkValid(options, valid)
+                        validOptions = validOptions.concat(valid)
+                        console.log(validOptions)
                     }
+                    checkValid(options, validOptions)
                 }
 
                 // looking right
                 if (i < size - 1) {
+                    let validOptions = []
                     let right = grid[(i + 1) + j * size]
                     for (let option of right.options) {
                         let valid = rules[option][3]
-                        checkValid(options, valid)
+                        validOptions = validOptions.concat(valid)
                     }
-                }
+                    checkValid(options, validOptions)
 
-                // // down
-                // if (j < size - 1) {
-                //     let down = grid[i + (j + 1) * size];
-                //     for (let option of down.options) {
-                //         let valid = rules[option][0]
-                //         checkValid(options, valid)
-                //     }
-                // }
+                };
+
+                // Look down
+                if (j < size - 1) {
+                    let validOptions = [];
+                    let down = grid[i + (j + 1) * size]; // xi undefined :(
+                    for (let option of down.options) { // aaaaaa jogeleem
+                        // see, we reduce options
+                        let valid = rules[option][0];
+                        validOptions = validOptions.concat(valid)
+                    }
+                    checkValid(options, validOptions)
+
+                };
 
                 // left
                 if (i > 0) {
+                    let validOptions = []
                     let left = grid[(i - 1) + j * size]
                     for (let option of left.options) {
                         let valid = rules[option][1]
-                        checkValid(options, valid)
+                        validOptions = validOptions.concat(valid)
                     }
+                    checkValid(options, validOptions)
+
                 }
 
                 nextTiles[index] = {
