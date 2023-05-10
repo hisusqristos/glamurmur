@@ -4,9 +4,9 @@ const isEqual = (arr1, arr2) => arr1.every((item, index) => item === arr2[index]
 // (listen, im really sorry..)
 // (i dont know how to write jest tests in parallel with html stuff)
 const testEqual = (testable, result) => {
-    console.log(isEqual(testable, result))
-    console.log(testable)
-    console.log(result)
+    // console.log(isEqual(testable, result))
+    // console.log(testable)
+    // console.log(result)
     return isEqual(testable, result)
 }
 
