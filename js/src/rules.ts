@@ -1,3 +1,10 @@
+// keeping track of index values, so we dont get confused
+const BLANK = 0
+const UP = 1
+const RIGHT = 2
+const DOWN = 3
+const LEFT = 4
+
 const rules = [
     [
         [BLANK, UP],

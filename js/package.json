@@ -1,0 +1,27 @@
+{
+  "name": "glamurmur",
+  "version": "1.0.0",
+  "description": "hiya",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/hisusqristos/glamurmur"
+  },
+  "keywords": [
+    "biduin"
+  ],
+  "author": "varechka",
+  "license": "MIT",
+  "dependencies": {
+    "jest": "^29.5.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.2.1",
+    "@types/p5": "^1.6.2",
+    "p5": "^1.6.0",
+    "typescript": "^5.0.4"
+  }
+}
