@@ -1,4 +1,7 @@
-const LookAround = (size: number) => {
+export { rules } from "./rules";
+import { grid, Cell, Grid } from "./index";
+
+const LookAround = (size: number, nextTiles: Grid, rules: number[][], options: number[]) => {
     for (let j = 0; j < size; j++) {
         for (let i = 0; i < size; i++) {
             let index = i + j * size;
@@ -8,7 +11,7 @@ const LookAround = (size: number) => {
             } else {
                 // looking whats above that cell (by j-1. its gets you one row upper /?/)
                 if (j > 0) {
-                    let validOptions = []
+                    let validOptions: number[] = []
                     let up = grid[i + (j - 1) * size]
                     for (let option of up.options) {
                         let valid = rules[option][2]
@@ -20,7 +23,7 @@ const LookAround = (size: number) => {
 
                 // looking right
                 if (i < size - 1) {
-                    let validOptions = []
+                    let validOptions: number[] = []
                     let right = grid[(i + 1) + j * size]
                     for (let option of right.options) {
                         let valid = rules[option][3]
@@ -32,7 +35,7 @@ const LookAround = (size: number) => {
 
                 // Look down
                 if (j < size - 1) {
-                    let validOptions = [];
+                    let validOptions: number[] = []
                     let down = grid[i + (j + 1) * size]; // xi undefined :(
                     for (let option of down.options) { // aaaaaa jogeleem
                         // see, we reduce options
@@ -45,7 +48,8 @@ const LookAround = (size: number) => {
 
                 // left
                 if (i > 0) {
-                    let validOptions = []
+                    let validOptions: number[] = []
+
                     let left = grid[(i - 1) + j * size]
                     for (let option of left.options) {
                         let valid = rules[option][1]

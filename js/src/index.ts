@@ -1,4 +1,5 @@
 import P5 from 'p5';
+import { BLANK, UP, RIGHT, DOWN, LEFT } from './rules';
 // load tile images
 import upTile from "../../tiles/up.png"
 import downTile from "../../tiles/down.png"
@@ -94,3 +95,5 @@ var sketch = (p: P5) => {
     }
 }
 new P5(sketch);
+
+export { grid, Cell, Grid }

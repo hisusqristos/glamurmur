@@ -37,3 +37,12 @@ const rules = [
         [UP, DOWN, RIGHT]
     ]
 ]
+
+export {
+    rules
+    , BLANK
+    , UP
+    , RIGHT
+    , DOWN
+    , LEFT
+}
